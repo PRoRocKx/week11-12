@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        loadEvents();
+        if (savedInstanceState == null) {
+            loadEvents();
+        }
     }
 
 

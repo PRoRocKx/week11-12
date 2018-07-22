@@ -14,6 +14,9 @@ import android.view.ViewGroup;
 import com.example.evgeniy.week11_12.pojo.Event;
 import com.example.evgeniy.week11_12.pojo.EventList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
