@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">week11-12</string>
+    <string name="app_name">week11–12</string>
+    <string name="load_fail">Не удалось загрузить данные</string>
+    <string name="repeat">Повторить</string>
+
+    <string name="startDate">Начало</string>
+    <string name="endDate">Конец</string>
+    <string name="place">Адресс</string>
+    <string name="phone">Телефон</string>
+    <string name="site">Сайт</string>
+    <string name="price">Цена</string>
+    <string name="picture">picture</string>
+    <string name="favorite">избранное</string>
 </resources>

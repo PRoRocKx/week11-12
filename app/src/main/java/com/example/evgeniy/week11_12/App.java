@@ -15,7 +15,7 @@ public class App extends Application {
         super.onCreate();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.mocky.io/v2") //Базовая часть адреса
+                .baseUrl("http://www.mocky.io/") //Базовая часть адреса
                 .addConverterFactory(GsonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
                 .build();
         api = retrofit.create(Api.class); //Создаем объект, при помощи которого будем выполнять запросы

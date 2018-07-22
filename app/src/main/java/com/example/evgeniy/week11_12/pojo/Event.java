@@ -1,10 +1,29 @@
 
 package com.example.evgeniy.week11_12.pojo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Event {
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+public class Event implements Parcelable {
+
+    public static String formatDate(String date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        try {
+            DateFormat dateFormat2 = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+            return (dateFormat2.format(dateFormat.parse(date)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 
     @SerializedName("id")
     @Expose
@@ -42,6 +61,39 @@ public class Event {
     @SerializedName("min_age")
     @Expose
     private Integer minAge;
+    public final static Parcelable.Creator<Event> CREATOR = new Creator<Event>() {
+
+
+        @SuppressWarnings({
+                "unchecked"
+        })
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        public Event[] newArray(int size) {
+            return (new Event[size]);
+        }
+
+    };
+
+    private Event(Parcel in) {
+        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
+        this.eventTitle = ((String) in.readValue((String.class.getClassLoader())));
+        this.startDate = ((String) in.readValue((String.class.getClassLoader())));
+        this.endDate = ((String) in.readValue((String.class.getClassLoader())));
+        this.place = ((Place) in.readValue((Place.class.getClassLoader())));
+        this.eventPhone = ((String) in.readValue((String.class.getClassLoader())));
+        this.eventSite = ((String) in.readValue((String.class.getClassLoader())));
+        this.planned = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
+        this.eventPrice = ((String) in.readValue((String.class.getClassLoader())));
+        this.picture = ((String) in.readValue((String.class.getClassLoader())));
+        this.eventRating = ((Double) in.readValue((Double.class.getClassLoader())));
+        this.minAge = ((Integer) in.readValue((Integer.class.getClassLoader())));
+    }
+
+    public Event() {
+    }
 
     public Integer getId() {
         return id;
@@ -139,6 +191,23 @@ public class Event {
         this.minAge = minAge;
     }
 
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(id);
+        dest.writeValue(eventTitle);
+        dest.writeValue(startDate);
+        dest.writeValue(endDate);
+        dest.writeValue(place);
+        dest.writeValue(eventPhone);
+        dest.writeValue(eventSite);
+        dest.writeValue(planned);
+        dest.writeValue(eventPrice);
+        dest.writeValue(picture);
+        dest.writeValue(eventRating);
+        dest.writeValue(minAge);
+    }
 
+    public int describeContents() {
+        return 0;
+    }
 
 }
