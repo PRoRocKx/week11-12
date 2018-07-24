@@ -17,12 +17,15 @@ public class Event implements Parcelable {
     public static String formatDate(String date) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         try {
-            DateFormat dateFormat2 = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+            DateFormat dateFormat2 = new SimpleDateFormat("d MMMM yyyy", Locale.getDefault());
             return (dateFormat2.format(dateFormat.parse(date)));
         } catch (ParseException e) {
             e.printStackTrace();
             return "";
         }
+    }
+    public static String formatMinAge(Integer age) {
+        return String.valueOf(age) + "+";
     }
 
     @SerializedName("id")
@@ -57,7 +60,7 @@ public class Event implements Parcelable {
     private String picture;
     @SerializedName("event_rating")
     @Expose
-    private Double eventRating;
+    private Float eventRating;
     @SerializedName("min_age")
     @Expose
     private Integer minAge;
@@ -88,7 +91,7 @@ public class Event implements Parcelable {
         this.planned = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.eventPrice = ((String) in.readValue((String.class.getClassLoader())));
         this.picture = ((String) in.readValue((String.class.getClassLoader())));
-        this.eventRating = ((Double) in.readValue((Double.class.getClassLoader())));
+        this.eventRating = ((Float) in.readValue((Float.class.getClassLoader())));
         this.minAge = ((Integer) in.readValue((Integer.class.getClassLoader())));
     }
 
@@ -175,11 +178,11 @@ public class Event implements Parcelable {
         this.picture = picture;
     }
 
-    public Double getEventRating() {
+    public Float getEventRating() {
         return eventRating;
     }
 
-    public void setEventRating(Double eventRating) {
+    public void setEventRating(Float eventRating) {
         this.eventRating = eventRating;
     }
 

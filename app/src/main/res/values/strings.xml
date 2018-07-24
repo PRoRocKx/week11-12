@@ -11,4 +11,6 @@
     <string name="price">Цена</string>
     <string name="picture">picture</string>
     <string name="favorite">избранное</string>
+
+    <string name="placeMark">placeMark</string>
 </resources>

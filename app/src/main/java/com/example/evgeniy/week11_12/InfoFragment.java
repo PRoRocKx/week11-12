@@ -25,6 +25,8 @@ public class InfoFragment extends Fragment {
 
     @BindView(R.id.picture)
     ImageView picture;
+    @BindView(R.id.placeMark)
+    ImageView placeMark;
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.startDate)
@@ -39,6 +41,8 @@ public class InfoFragment extends Fragment {
     TextView site;
     @BindView(R.id.price)
     TextView price;
+
+    private EventListFragment.FragmentListener fragmentListener;
 
     private Unbinder unbinder;
 
@@ -70,6 +74,14 @@ public class InfoFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (getActivity() instanceof EventListFragment.FragmentListener) {
+            fragmentListener = (EventListFragment.FragmentListener) getActivity();
+        }
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -87,7 +99,12 @@ public class InfoFragment extends Fragment {
             phone.setText(event.getEventPhone());
             site.setText(event.getEventSite());
             price.setText(event.getEventPrice());
+            placeMark.setOnClickListener(view1 -> showMap());
         }
+    }
+
+    private void showMap() {
+        fragmentListener.showMap(event);
     }
 
     @Override

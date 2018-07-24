@@ -18,10 +18,10 @@ public class Place implements Parcelable
     private String address;
     @SerializedName("event_lat")
     @Expose
-    private String eventLat;
+    private Double eventLat;
     @SerializedName("event_lng")
     @Expose
-    private String eventLng;
+    private Double eventLng;
     public final static Parcelable.Creator<Place> CREATOR = new Creator<Place>() {
 
 
@@ -42,8 +42,8 @@ public class Place implements Parcelable
     private Place(Parcel in) {
         this.city = ((String) in.readValue((String.class.getClassLoader())));
         this.address = ((String) in.readValue((String.class.getClassLoader())));
-        this.eventLat = ((String) in.readValue((String.class.getClassLoader())));
-        this.eventLng = ((String) in.readValue((String.class.getClassLoader())));
+        this.eventLat = ((Double) in.readValue((String.class.getClassLoader())));
+        this.eventLng = ((Double) in.readValue((String.class.getClassLoader())));
     }
 
     public Place() {
@@ -65,19 +65,19 @@ public class Place implements Parcelable
         this.address = address;
     }
 
-    public String getEventLat() {
+    public Double getEventLat() {
         return eventLat;
     }
 
-    public void setEventLat(String eventLat) {
+    public void setEventLat(Double eventLat) {
         this.eventLat = eventLat;
     }
 
-    public String getEventLng() {
+    public Double getEventLng() {
         return eventLng;
     }
 
-    public void setEventLng(String eventLng) {
+    public void setEventLng(Double eventLng) {
         this.eventLng = eventLng;
     }
 

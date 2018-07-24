@@ -4,6 +4,7 @@ package com.example.evgeniy.week11_12;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +14,6 @@ import android.view.ViewGroup;
 
 import com.example.evgeniy.week11_12.pojo.Event;
 import com.example.evgeniy.week11_12.pojo.EventList;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +28,12 @@ public class EventListFragment extends Fragment {
     @BindView(R.id.rv)
     RecyclerView recyclerView;
 
+    @BindView(R.id.fab_map)
+    FloatingActionButton fab;
+
     private Unbinder unbinder;
+
+    private FragmentListener fragmentListener;
 
     public EventListFragment() {
         // Required empty public constructor
@@ -67,17 +70,25 @@ public class EventListFragment extends Fragment {
         EventsAdapter eventsAdapter = new EventsAdapter(eventList.getEventList(), itemClickListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(eventsAdapter);
+        fab.setOnClickListener(view1 -> showMap());
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (getActivity() instanceof FragmentListener) {
+            fragmentListener = (FragmentListener) getActivity();
+        }
     }
 
     private void showInfo(Event event) {
-        if (getActivity() != null) {
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(android.R.id.content, InfoFragment.newInstance(event), InfoFragment.class.getSimpleName())
-                    .addToBackStack(InfoFragment.class.getSimpleName())
-                    .commit();
-        }
+        fragmentListener.showInfo(event);
     }
+
+    private void showMap() {
+        fragmentListener.showMap();
+    }
+
 
     @Override
     public void onDestroy() {
@@ -85,5 +96,15 @@ public class EventListFragment extends Fragment {
         if (unbinder != null) {
             unbinder.unbind();
         }
+    }
+
+    interface FragmentListener {
+        void showInfo(Event event);
+
+        void showMap(Event event);
+
+        void showMap();
+
+        void showList();
     }
 }
